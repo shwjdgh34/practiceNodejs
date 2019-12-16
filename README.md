@@ -1,5 +1,8 @@
 # Practice Nodejs
 
+this is for practicing nodejs by various test.
+learn Nodejs runtime Not just by thoery, but by code
+
 # TOC
 
 - [Practice Nodejs](#practice-nodejs)
