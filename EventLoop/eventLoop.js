@@ -23,30 +23,9 @@ setImmediate(() => {
 fs.readFile('./test.txt', () => {
   console.log('I/O polling and callbacks 1');
   console.log('------------------');
-
-  setTimeout(() => {
-    console.log('setTimeout 1-1');
-  }, 0);
-  setTimeout(() => {
-    console.log('setTimeout 1-2');
-  }, 3000);
-  setImmediate(() => {
-    console.log('setImediate 1');
-  });
+  setTimeout(() => console.log('setTimeout 1-1'), 0);
+  setTimeout(() => console.log('setTimeout 1-2'), 3000);
+  setImmediate(() => console.log('setImediate 1'));
+  process.nextTick(() => console.log('process.nextTick'));
+  fs.readFile('./test.txt', () => console.log('I/O 2'));
 });
-
-fs.readFile('./test.txt', () => {
-  console.log('I/O polling and callbacks 2');
-  console.log('------------------');
-
-  setTimeout(() => {
-    console.log('setTimeout 2-1');
-  }, 0);
-  setTimeout(() => {
-    console.log('setTimeout 2-2');
-  }, 3000);
-  setImmediate(() => {
-    console.log('setImediate 2');
-  });
-});
-console.log('top-level code');
