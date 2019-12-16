@@ -27,5 +27,4 @@ fs.readFile('./test.txt', () => {
   setTimeout(() => console.log('setTimeout 1-2'), 3000);
   setImmediate(() => console.log('setImediate 1'));
   process.nextTick(() => console.log('process.nextTick'));
-  fs.readFile('./test.txt', () => console.log('I/O 2'));
 });
