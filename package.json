@@ -1,0 +1,22 @@
+{
+  "name": "practicenode",
+  "version": "1.0.0",
+  "description": "![nodejs-architecture](./image/nodejs-architecture.png) this is for practicing nodejs by various test. learn Nodejs runtime Not just by thoery, but by code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shwjdgh34/practiceNodejs.git"
+  },
+  "author": "Jeongho Noh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shwjdgh34/practiceNodejs/issues"
+  },
+  "homepage": "https://github.com/shwjdgh34/practiceNodejs#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}

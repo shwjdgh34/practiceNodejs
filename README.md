@@ -68,6 +68,8 @@ And then, process.nextTick(). Remember nextTick is a part of the microtasks queu
 
 ![node-process-thread](./image/node-process-thread.png)
 
+the thread pool gives us four additional threads that are completely separate from the main single thread. And we can actually configure it up to 128 threads. But usually, these four are enough. So these threads together formed a thread pool. And the event loop can then automatically offload heavy tasks to the thread pool where they don't block our event loop. All this happens automatically behind the scenes by libuv.
+
 ### dafault, 4
 
 ```javascript
