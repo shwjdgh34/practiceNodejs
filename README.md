@@ -1,5 +1,6 @@
-# Practice Nodejs
+# Nodejs
 
+![nodejs-architecture](./image/nodejs-architecture.png)
 this is for practicing nodejs by various test.
 learn Nodejs runtime Not just by thoery, but by code
 
@@ -62,3 +63,52 @@ fs.readFile('./test.txt', () => {
 the event loop actually waits for stuff to happen in the poll phase. So in that phase where I/O callbacks are handled. So when thiss queue of callbacks is empt, which is the case in our fictional expample here, so we have no I/O callbacks, all we have is these timers, then the event loop will wait in this phase until there iss an expired timer. But if we sscheduled a callback using setImmediate, then that callback will actually be excuted right away after the polling phase, and even before expired timers, if there is one. And in this case, the imer expires right away, so after zero seconds, but again, the event loop actually waits, so it pauses in the polling phase. And so that seImmediate callback is actually executed first, so that is the whole reason why we have this immediate here after we have the timers.
 
 And then, process.nextTick(). Remember nextTick is a part of the microtasks queue, which get excuted after each phase, so not just after one entire tick.
+
+## Thread Pool
+
+![node-process-thread](./image/node-process-thread.png)
+
+### dafault, 4
+
+```javascript
+const crypto = require('crypto');
+const start = Date.now();
+
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+```
+
+![thread-pool4](./image/thread-pool4.png)
+
+### thread pool size, 2
+
+```javascript
+const crypto = require('crypto');
+const start = Date.now();
+process.env.UV_THREADPOOL_SIZE = 2;
+
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () =>
+  console.log(Date.now() - start, 'Password encrypted')
+);
+```
+
+![thread-pool2](./image/thread-pool2.png)
